@@ -34,7 +34,7 @@ public class BookDetailsImp implements BookDetailsDAO{
 	    stmt.setInt(8, bookdetails.bookPrice);
 	    int row=stmt.executeUpdate();
 	    System.out.println(row);
-	    
+	    con.close();
 	}
 
 
@@ -48,7 +48,7 @@ public class BookDetailsImp implements BookDetailsDAO{
 		stmt.setInt(3, bookdetails.bookEdition);
 		int row = stmt.executeUpdate();
 		System.out.println(row);
-		
+		con.close();
 	}
 
 	public BookDetails displayBook(int bookId) throws Exception {
@@ -73,7 +73,7 @@ public class BookDetailsImp implements BookDetailsDAO{
 			ob.bookPages=rs.getInt("no_of_pgs");
 			System.out.println(ob);
 		}
-		
+		con.close();
 		return ob;
 	}
 
@@ -102,6 +102,7 @@ public class BookDetailsImp implements BookDetailsDAO{
 		for (BookDetails bookDetails : list) {
 			System.out.println(bookDetails);
 		}
+		con.close();
 		return list;
 	}
 		

@@ -17,7 +17,7 @@ public abstract class TestAddNewAdmin {
 		obj.adminPassword=sc.next();
 		obj.adminGender=sc.next();
 		ob.addNewAdmin(obj);
-
+		sc.close();
 	}
 
 }

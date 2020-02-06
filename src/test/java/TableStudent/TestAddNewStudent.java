@@ -32,7 +32,7 @@ public class TestAddNewStudent {
 	    ob.yearOfJoin=yearOfJoin;
 	    
 	    obj.addStudentDetails(ob);
-	    
+	    sc.close();
 	    
 
 	}

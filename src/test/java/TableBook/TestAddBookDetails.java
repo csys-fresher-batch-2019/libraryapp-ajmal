@@ -42,7 +42,7 @@ System.out.print("Entre values \nBook Name :");
 		
 		
 		obj.addNewBook(ob);	
-   
+		sc.close();
     
 	
 	}

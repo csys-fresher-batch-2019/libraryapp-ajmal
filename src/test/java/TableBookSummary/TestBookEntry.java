@@ -12,7 +12,7 @@ public class TestBookEntry {
 		System.out.print("Rnter Student ID : ");
 		int studentId=sc.nextInt();
 		ob.addNewEntry(studentId, bookId);
-
+		sc.close();
 	}
 
 }

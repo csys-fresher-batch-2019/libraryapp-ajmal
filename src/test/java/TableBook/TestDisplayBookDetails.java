@@ -9,6 +9,7 @@ public class TestDisplayBookDetails {
 		Scanner sc = new Scanner(System.in);
 		int bookId=sc.nextInt();
 		ob.displayBook(bookId);
+		sc.close();
 	}
 
 }

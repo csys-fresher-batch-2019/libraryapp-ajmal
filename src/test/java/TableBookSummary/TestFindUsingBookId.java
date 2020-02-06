@@ -11,7 +11,7 @@ public class TestFindUsingBookId {
 		Scanner sc=new Scanner(System.in);
 		int bookId=sc.nextInt();
 		ob.displayStudentDetailsForDueDate(bookId);
-
+		sc.close();
 	}
 
 }

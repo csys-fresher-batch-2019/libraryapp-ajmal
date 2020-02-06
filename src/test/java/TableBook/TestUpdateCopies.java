@@ -16,7 +16,7 @@ public class TestUpdateCopies {
 	ob.bookCopies=bookCopies;
 	System.out.println(ob);
 	obj.updateBookCopies(ob);
-	
+	sc.close();
 
 	}
 

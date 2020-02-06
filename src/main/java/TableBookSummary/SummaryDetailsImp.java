@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Libary3.SummaryDetailsDueDate;
+import Libary3.SummaryDetailsStudentDetails;
 
 public class SummaryDetailsImp implements SummaryDetailsDAO{
 	public static Connection getConnection() throws Exception {
 		 Class.forName("oracle.jdbc.driver.OracleDriver");
 		 Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","oracle");
-			//System.out.println(connection);
 			return connection;
 		
 	}
@@ -44,47 +44,11 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 		stmt.setInt(2, studentId);
 		int row=stmt.executeUpdate();
 		System.out.println(row);
-		}		
+		}	
+		con.close();
 		
 	}
-/*
-	public void updateReturnRecord(int studentId, int bookId,int fineAmount) throws Exception {
-		Connection con =getConnection();
-		LocalDate returnedDate=LocalDate.now();
-		Date date = Date.valueOf(returnedDate);
-		String sql= "select * from details where book_id=? and std_id=? and status=0";
-		PreparedStatement stmt=con.prepareStatement(sql);
-		stmt.setInt(1, bookId);
-		stmt.setInt(2, studentId);
-		ResultSet rs=stmt.executeQuery();
-		int status=1;
-		if(rs.next())
-		{
-			 status=rs.getInt("status");
-		}
-		if(status==0)
-		{
-			String sql1="update details set fine_amt=? where book_id =? and std_id =? and status=0";
-			PreparedStatement stmt1=con.prepareStatement(sql1);
-			stmt1.setInt(1, fineAmount);
-			stmt1.setInt(2, bookId);
-			stmt1.setInt(3, studentId);
-			int rs1=stmt1.executeUpdate();
-			System.out.println("Fine Updated");
-			
-		}
-		else
-		{
-			System.out.println("No Due Pending");
-		}
-		String sql2="update details set status=1 , returned_date=sysdate where book_id =? and std_id =? and status=0";
-		PreparedStatement stmt2=con.prepareStatement(sql2);
-		stmt2.setInt(1, bookId);
-		stmt2.setInt(2, studentId);
-		int rs2=stmt2.executeUpdate();
-			
-		
-	}*/
+
 
 	public int calculateFineAmount(int studentId, int bookId) throws Exception {
 		Connection con=getConnection();
@@ -133,7 +97,6 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 		if(rs.next())
 		{
 			 dueDate=rs.getDate("due_date").toLocalDate();
-			 //a=rs.getInt("status");
 			 int status=rs.getInt("status");
 			 a=status;
 		}
@@ -152,6 +115,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 		System.out.println("do uou want to coyinue:(Y/N)- ");
 		Scanner sc=new Scanner(System.in);
 		String az=sc.next();
+		sc.close();
 		if(az.equalsIgnoreCase("Y"))
 			{
 
@@ -162,7 +126,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 			stmt1.setInt(1, fineAmount);
 			stmt1.setInt(2, bookId);
 			stmt1.setInt(3, studentId);
-			int rs1=stmt1.executeUpdate();
+			stmt1.executeUpdate();
 			System.out.println("Fine Updated");
 			
 		}
@@ -174,7 +138,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 		PreparedStatement stmt2=con.prepareStatement(sql2);
 		stmt2.setInt(1, bookId);
 		stmt2.setInt(2, studentId);
-		int rs2=stmt2.executeUpdate();
+		stmt2.executeUpdate();
 		}
 		else
 		{
@@ -185,7 +149,8 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 		{
 			System.out.println("No Books Taken");
 		}
-
+		
+		con.close();
 	}
 
 	public ArrayList<SummaryDetailsDueDate> displayStudentDetailsForDueDate(int bookId) throws Exception {
@@ -214,4 +179,46 @@ public class SummaryDetailsImp implements SummaryDetailsDAO{
 		}
 		return list;
 	}
+
+	public void totalFineAmount() throws Exception {
+		Connection con =getConnection();
+		String sql="select sum(fine_amt) from details";
+		PreparedStatement stmt=con.prepareStatement(sql);
+		ResultSet rs=stmt.executeQuery();
+		if(rs.next())
+		{
+			int fineAmount=rs.getInt("sum(fine_amt)");
+			System.out.println("Sum of fine="+fineAmount);
+		}
+		con.close();
+		
+	}
+
+	public ArrayList<SummaryDetailsStudentDetails> studentNotReturnedBook(int studentId) throws Exception {
+		Connection con =getConnection();
+		String sql="select  s.std_name,b.book_name,b.book_id,d.issue_date,d.due_date from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.std_id=?";
+		PreparedStatement stmt=con.prepareStatement(sql);
+		stmt.setInt(1, studentId);
+		ResultSet rs=stmt.executeQuery();
+		ArrayList<SummaryDetailsStudentDetails> list=new ArrayList<SummaryDetailsStudentDetails>();
+		while(rs.next())
+		{
+			SummaryDetailsStudentDetails ob=new SummaryDetailsStudentDetails();
+			ob.bookId=rs.getInt("book_id");
+			ob.bookName=rs.getString("book_name");
+			ob.issueDate=rs.getDate("issue_date");
+			ob.duedate=rs.getDate("due_date");
+			ob.studentName=rs.getString("std_name");
+			list.add(ob);
+		}
+		for(SummaryDetailsStudentDetails details : list)
+		{
+			System.out.println(details);
+		}
+		con.close();
+		return list;
+	}
+	
+	
+	
 }

@@ -10,7 +10,7 @@ public class TestDisplayStudentDetail {
 		System.out.print("Enter Student Id - ");
 		int studentId=sc.nextInt();
 		ob.displayStudentDetail(studentId);
-
+		sc.close();
 	}
 
 }
