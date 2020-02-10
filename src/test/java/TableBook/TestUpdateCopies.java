@@ -2,6 +2,9 @@ package TableBook;
 
 import java.util.Scanner;
 
+import com.chainsys.libraryapp.Implementation.BookDetailsImp;
+import com.chainsys.libraryapp.LibaryModel.BookDetails;
+
 public class TestUpdateCopies {
 
 	public static void main(String[] args) throws Exception {
@@ -11,9 +14,9 @@ public class TestUpdateCopies {
 	int bookEdition=sc.nextInt();
 	int bookCopies= sc.nextInt();
 	BookDetails ob = new BookDetails();
-	ob.bookName=bookName;
-	ob.bookEdition=bookEdition;
-	ob.bookCopies=bookCopies;
+	ob.setBookName(bookName);
+	ob.setBookEdition(bookEdition);
+	ob.setBookCopies(bookCopies);
 	System.out.println(ob);
 	obj.updateBookCopies(ob);
 	sc.close();

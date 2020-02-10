@@ -2,6 +2,8 @@ package TableStudent;
 
 import java.util.Scanner;
 
+import com.chainsys.libraryapp.Implementation.StudentDetailsImp;
+
 public class TestDisplayStudentDetail {
 
 	public static void main(String[] args) throws Exception {

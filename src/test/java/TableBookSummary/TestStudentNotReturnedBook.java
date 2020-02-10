@@ -1,6 +1,10 @@
 package TableBookSummary;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.chainsys.libraryapp.Implementation.SummaryDetailsImp;
+import com.chainsys.libraryapp.LibaryModel.SummaryDetailsStudentDetails;
 
 public abstract class TestStudentNotReturnedBook {
 
@@ -9,7 +13,18 @@ public abstract class TestStudentNotReturnedBook {
 		SummaryDetailsImp ob=new SummaryDetailsImp();
 		System.out.print("Enter the Student id : ");
 		int studentId=sc.nextInt();
-		ob.studentNotReturnedBook(studentId);
+		
+		ArrayList<SummaryDetailsStudentDetails> out = ob.studentNotReturnedBook(studentId);
+		if(out != null)
+		{
+			for (SummaryDetailsStudentDetails details : out) {
+				System.out.println(details);
+			}
+		}
+		else
+		{
+			System.out.println("This Student has not taken any book");	
+		}
 		sc.close();
 	}
 

@@ -2,6 +2,8 @@ package TableBookSummary;
 
 import java.util.Scanner;
 
+import com.chainsys.libraryapp.Implementation.SummaryDetailsImp;
+
 public class TestRenualOfABook {
 
 	public static void main(String[] args) throws Exception {
@@ -11,8 +13,27 @@ public class TestRenualOfABook {
 		int bookId=sc.nextInt();
 		System.out.print("Enter the StudentId : ");
 		int studentId=sc.nextInt();
-		ob.updateReturnRecord(studentId, bookId);
-		ob.addNewEntry(studentId, bookId);
+		
+		boolean taken=ob.bookTaken(studentId, bookId);
+		if(taken)
+		{
+		Integer fineAmount=ob.calculateFineAmount(studentId, bookId);
+		System.out.println("Fine Amount = "+fineAmount+"\nDo you want to return (Y/N) - ");
+		String output=sc.next();
+		if(output.equalsIgnoreCase("Y"))
+		{
+			ob.updateReturnRecord(studentId, bookId,fineAmount);
+			ob.addNewEntry(studentId, bookId);
+		}
+		else
+		{
+			System.out.println("ThankYou...!");
+		}
+		}
+		else
+		{
+			System.out.println("No Book has Taken");
+		}		
 		sc.close();
 		
 

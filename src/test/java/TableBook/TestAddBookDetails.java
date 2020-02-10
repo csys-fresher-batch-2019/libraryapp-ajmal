@@ -3,6 +3,9 @@ package TableBook;
 import java.sql.Date;
 import java.util.Scanner;
 
+import com.chainsys.libraryapp.Implementation.BookDetailsImp;
+import com.chainsys.libraryapp.LibaryModel.BookDetails;
+
 
 public class TestAddBookDetails {
 
@@ -31,14 +34,14 @@ System.out.print("Entre values \nBook Name :");
     Date date = Date.valueOf(bookPurchasedDate);
     
 		BookDetails ob=new BookDetails();
-		ob.bookName=bookName;
-		ob.bookCategory=bookCategory;
-		ob.bookAutherName=bookAuthor;
-		ob.bookEdition=bookEdition;
-		ob.bookPages=bookPages;
-		ob.bookCopies=bookCopies;
-		ob.bookPrice=bookPrice;
-		ob.bookPurchasedDate=date;
+		ob.setBookName(bookName);
+		ob.setBookCategory(bookCategory);
+		ob.setBookAutherName(bookAuthor);
+		ob.setBookEdition(bookEdition);
+		ob.setBookPages(bookPages);
+		ob.setBookCopies(bookCopies);
+		ob.setBookPrice(bookPrice);
+		ob.setBookPurchasedDate(date);
 		
 		
 		obj.addNewBook(ob);	

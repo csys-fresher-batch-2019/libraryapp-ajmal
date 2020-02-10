@@ -1,13 +1,15 @@
-package Libary3;
+package com.chainsys.libraryapp.LibaryModel;
 
 import java.sql.Date;
 
+import lombok.Data;
+@Data
 public class SummaryDetailsStudentDetails {
-	public String studentName;
-	public int bookId;
-	public String bookName;
-	public Date issueDate;
-	public Date duedate;
+	private String studentName;
+	private int bookId;
+	private String bookName;
+	private Date issueDate;
+	private Date duedate;
 	@Override
 	public String toString() {
 		return "SummaryDetailsStudentDetails [studentName=" + studentName + ", bookId=" + bookId + ", bookName="

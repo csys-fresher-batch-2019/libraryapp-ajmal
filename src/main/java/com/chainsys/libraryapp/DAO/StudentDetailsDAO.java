@@ -1,6 +1,8 @@
-package TableStudent;
+package com.chainsys.libraryapp.DAO;
 
 import java.util.ArrayList;
+
+import com.chainsys.libraryapp.LibaryModel.StudentDetails;
 
 
 public interface StudentDetailsDAO {

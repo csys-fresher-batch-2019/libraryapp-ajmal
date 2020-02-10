@@ -2,6 +2,8 @@ package TableBookSummary;
 
 import java.util.Scanner;
 
+import com.chainsys.libraryapp.Implementation.SummaryDetailsImp;
+
 public class TestBookEntry {
 
 	public static void main(String[] args) throws Exception {

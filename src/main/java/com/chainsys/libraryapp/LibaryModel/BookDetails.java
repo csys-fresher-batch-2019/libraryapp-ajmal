@@ -1,17 +1,19 @@
-package TableBook;
+package com.chainsys.libraryapp.LibaryModel;
 
 import java.sql.Date;
 
+import lombok.Data;
+@Data
 public class BookDetails {
-	public int bookId;
-	public String bookName;
-	public String bookCategory;
-	public String bookAutherName;
-	public int bookEdition;
-	public int bookPrice;
-	public Date bookPurchasedDate;
-	public int bookCopies;
-	public int bookPages;
+	private int bookId;
+	private String bookName;
+	private String bookCategory;
+	private String bookAutherName;
+	private int bookEdition;
+	private int bookPrice;
+	private Date bookPurchasedDate;
+	private int bookCopies;
+	private int bookPages;
 	@Override
 	public String toString() {
 		return "BookDetails [bookId=" + bookId + ", bookName=" + bookName + ", bookCategory=" + bookCategory

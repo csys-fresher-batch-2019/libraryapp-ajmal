@@ -4,6 +4,9 @@ package TableStudent;
 import java.sql.Date;
 import java.util.Scanner;
 
+import com.chainsys.libraryapp.Implementation.StudentDetailsImp;
+import com.chainsys.libraryapp.LibaryModel.StudentDetails;
+
 public class TestAddNewStudent {
 
 	public static void main(String[] args) throws Exception {
@@ -24,12 +27,12 @@ public class TestAddNewStudent {
 	    
 	    StudentDetailsImp obj =new StudentDetailsImp();
 	    StudentDetails ob=new StudentDetails();
-	    ob.studentName= studentName;
-	    ob.studentDepatment= studentDepartment;
-	    ob.dateOfBirth=date;
-	    ob.studentMailId=studentMailId;
-	    ob.mobileNumber=mobileNumber;
-	    ob.yearOfJoin=yearOfJoin;
+	    ob.setStudentName(studentName);
+	    ob.setStudentDepatment(studentDepartment);
+	    ob.setDateOfBirth(date);
+	    ob.setStudentMailId(studentMailId);
+	    ob.setMobileNumber(mobileNumber);
+	    ob.setYearOfJoin(yearOfJoin);
 	    
 	    obj.addStudentDetails(ob);
 	    sc.close();

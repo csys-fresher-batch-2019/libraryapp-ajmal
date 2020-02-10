@@ -1,6 +1,8 @@
-package TableBook;
+package com.chainsys.libraryapp.DAO;
 
 import java.util.ArrayList;
+
+import com.chainsys.libraryapp.LibaryModel.BookDetails;
 
 public interface BookDetailsDAO {
 	 public void addNewBook(BookDetails bookdetails)throws Exception;

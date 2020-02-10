@@ -1,15 +1,17 @@
-package TableStudent;
+package com.chainsys.libraryapp.LibaryModel;
 
 import java.sql.Date;
 
+import lombok.Data;
+@Data
 public class StudentDetails {
-public int studentId;
-public String studentName;
-public String studentDepatment;
-public Date dateOfBirth;
-public String studentMailId;
-public long mobileNumber;
-public int yearOfJoin;
+	private int studentId;
+	private String studentName;
+	private String studentDepatment;
+	private Date dateOfBirth;
+	private String studentMailId;
+	private long mobileNumber;
+	private int yearOfJoin;
 @Override
 public String toString() {
 	return "StudentDetails [studentId=" + studentId + ", studentName=" + studentName + ", studentDepatment="
