@@ -1,4 +1,4 @@
-package com.chainsys.libraryapp.DAO;
+package com.chainsys.libraryapp.dao;
 
 import java.util.ArrayList;
 

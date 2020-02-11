@@ -2,13 +2,13 @@ package TableBook;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.BookDetailsImp;
+import com.chainsys.libraryapp.Implementation.BookDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
 
 public class TestUpdateCopies {
 
 	public static void main(String[] args) throws Exception {
-	BookDetailsImp obj= new BookDetailsImp();
+	BookDetailsDAOImp obj= new BookDetailsDAOImp();
 	Scanner sc = new Scanner(System.in);
 	String bookName= sc.nextLine();
 	int bookEdition=sc.nextInt();

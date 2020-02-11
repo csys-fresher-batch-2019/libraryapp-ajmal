@@ -3,13 +3,13 @@ package AdminDetails;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.AdminDetailsImp;
+import com.chainsys.libraryapp.Implementation.AdminDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.AdminDetails;
 
 public abstract class TestAddNewAdmin {
 
 	public static void main(String[] args) throws Exception{
-		AdminDetailsImp ob=new AdminDetailsImp();
+		AdminDetailsDAOImp ob=new AdminDetailsDAOImp();
 		AdminDetails obj=new AdminDetails();
 		Scanner sc=new Scanner(System.in);
 		obj.setAdminName(sc.next());

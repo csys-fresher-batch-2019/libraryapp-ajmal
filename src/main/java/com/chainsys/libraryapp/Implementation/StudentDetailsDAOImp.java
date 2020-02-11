@@ -6,16 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.chainsys.libraryapp.DAO.StudentDetailsDAO;
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
-import com.chainsys.libraryapp.Utile.ConnectionUtile;
+import com.chainsys.libraryapp.Util.ConnectionUtil;
+import com.chainsys.libraryapp.dao.StudentDetailsDAO;
 import com.chainsys.libraryapp.exception.DbException;
 
-public class StudentDetailsImp implements StudentDetailsDAO {
+public class StudentDetailsDAOImp implements StudentDetailsDAO {
 
 	public void addStudentDetails(StudentDetails studentdetails) throws DbException {
 		String sql = "insert into student(std_name,std_dept,std_dob,std_mail_id,std_mob_no,joining_yr,std_id) values(?,?,?,?,?,?,std_seq.nextval)";
-		try (Connection con = ConnectionUtile.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
+		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
 			stmt.setString(1, studentdetails.getStudentName());
 			stmt.setString(2, studentdetails.getStudentDepatment());
 			stmt.setDate(3, studentdetails.getDateOfBirth());
@@ -32,7 +32,7 @@ public class StudentDetailsImp implements StudentDetailsDAO {
 	public StudentDetails displayStudentDetail(int studentId) throws DbException {
 		StudentDetails ob = null;
 		String sql = "select * from student where std_id=?";
-		try (Connection con = ConnectionUtile.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
+		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
 			stmt.setInt(1, studentId);
 			try (ResultSet rs = stmt.executeQuery();) {
 
@@ -57,7 +57,7 @@ public class StudentDetailsImp implements StudentDetailsDAO {
 	public ArrayList<StudentDetails> displayAllStudents() throws DbException {
 		ArrayList<StudentDetails> list = new ArrayList<StudentDetails>();
 		String sql = "select * from student";
-		try (Connection con = ConnectionUtile.getConnection();PreparedStatement stmt = con.prepareStatement(sql);
+		try (Connection con = ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();)
 		{
 		

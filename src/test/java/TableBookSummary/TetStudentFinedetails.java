@@ -3,13 +3,13 @@ package TableBookSummary;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.SummaryDetailsImp;
+import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.StudentFineSummaryDetails;
 
 public class TetStudentFinedetails {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsImp ob= new SummaryDetailsImp();
+		SummaryDetailsDAOImp ob= new SummaryDetailsDAOImp();
 		Scanner sc=new Scanner(System.in);
 		//To calculate the Total Fine amount of a student along with their not Returned books
 		System.out.print("Enter the Student Id : ");

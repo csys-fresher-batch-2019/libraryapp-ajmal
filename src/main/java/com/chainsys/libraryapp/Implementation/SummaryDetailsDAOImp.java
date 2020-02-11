@@ -10,19 +10,19 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import com.chainsys.libraryapp.DAO.SummaryDetailsDAO;
 import com.chainsys.libraryapp.LibaryModel.StudentFineSummaryDetails;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsDueDate;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsStudentDetails;
-import com.chainsys.libraryapp.Utile.ConnectionUtile;
+import com.chainsys.libraryapp.Util.ConnectionUtil;
+import com.chainsys.libraryapp.dao.SummaryDetailsDAO;
 import com.chainsys.libraryapp.exception.DbException;
 
-public class SummaryDetailsImp implements SummaryDetailsDAO {
+public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 
 
 	public void addNewEntry(int studentId, int bookId) throws DbException {
 		String sqll = "select * from details where book_id=" + bookId + " and std_id=" + studentId + " and status =0";
-		try(Connection con=ConnectionUtile.getConnection(); Statement st = con.createStatement();ResultSet rs = st.executeQuery(sqll);) {
+		try(Connection con=ConnectionUtil.getConnection(); Statement st = con.createStatement();ResultSet rs = st.executeQuery(sqll);) {
 			int dBookId = 0;
 			if (rs.next()) {
 				dBookId = rs.getInt("book_id");
@@ -49,7 +49,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 		LocalDate returnedDate = LocalDate.now();
 		Integer fineAmount = null;
 		String sql = "select * from details where book_id=? and std_id=? and status=0";
-		try(Connection con=ConnectionUtile.getConnection();
+		try(Connection con=ConnectionUtil.getConnection();
 		PreparedStatement stmt = con.prepareStatement(sql);)
 		{
 		stmt.setInt(1, bookId);
@@ -85,7 +85,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 	public ArrayList<SummaryDetailsDueDate> displayStudentDetailsForDueDate(int bookId) throws DbException {
 		String sql = "select  d.std_id,s.std_name,s.std_dept,s.std_mob_no,d.book_id,b.book_name,d.issue_date,d.due_date from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.book_id=?";
 		ArrayList<SummaryDetailsDueDate> list = new ArrayList<SummaryDetailsDueDate>();
-		try(Connection con=ConnectionUtile.getConnection();
+		try(Connection con=ConnectionUtil.getConnection();
 		PreparedStatement stmt = con.prepareStatement(sql);)
 		{
 		stmt.setInt(1, bookId);
@@ -117,7 +117,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 	public int totalFineAmount() throws Exception {
 		int total=0;
 		String sql = "select sum(fine_amt) from details";
-		try(Connection con=ConnectionUtile.getConnection();
+		try(Connection con=ConnectionUtil.getConnection();
 		PreparedStatement stmt = con.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();)
 		{
@@ -139,7 +139,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 	public ArrayList<SummaryDetailsStudentDetails> studentNotReturnedBook(int studentId) throws DbException {
 		ArrayList<SummaryDetailsStudentDetails> list = new ArrayList<SummaryDetailsStudentDetails>();
 		String sql = "select  s.std_name,b.book_name,b.book_id,d.issue_date,d.due_date from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.std_id=?";
-		try(Connection con=ConnectionUtile.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
+		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
 		{
 		stmt.setInt(1, studentId);
 		try(ResultSet rs = stmt.executeQuery();)
@@ -168,7 +168,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 		
 		if (fineAmount != 0) {
 			String sql = "update details set fine_amt=? where book_id =? and std_id =? and status=0";
-			try(Connection con=ConnectionUtile.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
+			try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
 			{
 			stmt.setInt(1, fineAmount);
 			stmt.setInt(2, bookId);
@@ -179,7 +179,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 			} 
 			else {
 			String sql = "update details set fine_amt=0 where book_id =? and std_id =? and status=0";
-			try(Connection con=ConnectionUtile.getConnection();
+			try(Connection con=ConnectionUtil.getConnection();
 			PreparedStatement stmt = con.prepareStatement(sql);)
 			{
 			stmt.setInt(1, bookId);
@@ -189,7 +189,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 			System.out.println("Fine Updated");
 		}
 		String sql2 = "update details set status=1 , returned_date=sysdate where book_id =? and std_id =? and status=0";
-		try(Connection con=ConnectionUtile.getConnection();PreparedStatement stmt2 = con.prepareStatement(sql2);)
+		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt2 = con.prepareStatement(sql2);)
 		{
 		stmt2.setInt(1, bookId);
 		stmt2.setInt(2, studentId);
@@ -208,7 +208,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 
 		String sql = "select * from details where book_id=? and std_id=? and status=0";
 		System.out.println(sql);
-		try(Connection con=ConnectionUtile.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
+		try(Connection con=ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
 			stmt.setInt(1, bookId);
 			stmt.setInt(2, studentId);
 
@@ -229,7 +229,7 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 	public ArrayList<StudentFineSummaryDetails> totalFineAmountOfStudent(int studentId) throws DbException {
 		String sql="select  s.std_name,b.book_name,b.book_id,b.book_cat,d.issue_date,d.due_date,d.fine_amt from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.std_id=?";
 		ArrayList<StudentFineSummaryDetails> list=new ArrayList<>();
-		try(Connection con=ConnectionUtile.getConnection(); PreparedStatement stmt=con.prepareStatement(sql);)
+		try(Connection con=ConnectionUtil.getConnection(); PreparedStatement stmt=con.prepareStatement(sql);)
 		{
 			stmt.setInt(1, studentId);
 			int totalFineAmount=0;
@@ -268,6 +268,31 @@ public class SummaryDetailsImp implements SummaryDetailsDAO {
 		}
 	
 		return list;
+	}
+
+	@Override
+	public int noOfBooksAvailable(int bookId) throws DbException {
+		String sql = "select fn_rem_bks(?) as total from dual";
+		int remaining=0;
+		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt=con.prepareStatement(sql);)
+		{
+			stmt.setInt(1, bookId);
+			try(ResultSet rs=stmt.executeQuery();)
+			{
+				if(rs.next())
+				{
+					remaining=rs.getInt("total");
+				}
+			}
+			
+	
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			throw new DbException("Unable to calculate");
+		}
+		return remaining;
 	}
 
 }

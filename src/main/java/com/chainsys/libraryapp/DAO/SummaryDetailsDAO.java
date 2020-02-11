@@ -1,4 +1,4 @@
-package com.chainsys.libraryapp.DAO;
+package com.chainsys.libraryapp.dao;
 
 import java.util.ArrayList;
 
@@ -15,4 +15,5 @@ public interface SummaryDetailsDAO {
 	public ArrayList<SummaryDetailsStudentDetails> studentNotReturnedBook(int studentId)throws Exception;
 	public boolean bookTaken(int studentId,int bookId)throws Exception;
 	public ArrayList<StudentFineSummaryDetails> totalFineAmountOfStudent(int studentId) throws Exception;
+	public int noOfBooksAvailable(int bookId) throws Exception;
 }

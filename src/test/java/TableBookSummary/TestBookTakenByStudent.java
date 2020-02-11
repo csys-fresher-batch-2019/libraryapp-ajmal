@@ -2,12 +2,12 @@ package TableBookSummary;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.SummaryDetailsImp;
+import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
 
 public class TestBookTakenByStudent {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsImp ob=new SummaryDetailsImp();
+		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
 		Scanner sc=new Scanner(System.in);
 		System.out.print("Enter the BookId : ");
 		int bookId=sc.nextInt();

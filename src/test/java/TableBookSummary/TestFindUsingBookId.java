@@ -3,13 +3,13 @@ package TableBookSummary;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.SummaryDetailsImp;
+import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsDueDate;
 
 public class TestFindUsingBookId {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsImp ob=new SummaryDetailsImp();
+		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
 		System.out.print("Enter the BookId to be found :");
 		Scanner sc=new Scanner(System.in);
 		int bookId=sc.nextInt();

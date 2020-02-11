@@ -1,11 +1,11 @@
 package TableStudent;
 
-import com.chainsys.libraryapp.Implementation.StudentDetailsImp;
+import com.chainsys.libraryapp.Implementation.StudentDetailsDAOImp;
 
 public class TestDisplayAllStudentDetails {
 
 	public static void main(String[] args) throws Exception {
-		StudentDetailsImp ob=new StudentDetailsImp();
+		StudentDetailsDAOImp ob=new StudentDetailsDAOImp();
 		ob.displayAllStudents();
 
 	}

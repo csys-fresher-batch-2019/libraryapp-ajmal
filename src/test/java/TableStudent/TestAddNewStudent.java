@@ -4,7 +4,7 @@ package TableStudent;
 import java.sql.Date;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.StudentDetailsImp;
+import com.chainsys.libraryapp.Implementation.StudentDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
 
 public class TestAddNewStudent {
@@ -25,7 +25,7 @@ public class TestAddNewStudent {
 	    int yearOfJoin = sc.nextInt();
 	    Date date = Date.valueOf(dateOfBirth);
 	    
-	    StudentDetailsImp obj =new StudentDetailsImp();
+	    StudentDetailsDAOImp obj =new StudentDetailsDAOImp();
 	    StudentDetails ob=new StudentDetails();
 	    ob.setStudentName(studentName);
 	    ob.setStudentDepatment(studentDepartment);

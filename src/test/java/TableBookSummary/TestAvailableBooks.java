@@ -4,18 +4,16 @@ import java.util.Scanner;
 
 import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
 
-public class TestBookEntry {
+public class TestAvailableBooks {
 
 	public static void main(String[] args) throws Exception {
 		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
-		Scanner sc =new Scanner(System.in);
-		System.out.print("Enter Book ID : ");
-		int bookId = sc.nextInt();
-		System.out.print("Rnter Student ID : ");
-		int studentId=sc.nextInt();
-		ob.addNewEntry(studentId, bookId);
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the book to be found available");
+		int bookId=sc.nextInt();
+		int remaining=ob.noOfBooksAvailable(bookId);
+		System.out.println(remaining);
 		sc.close();
 	}
 
 }
- 		

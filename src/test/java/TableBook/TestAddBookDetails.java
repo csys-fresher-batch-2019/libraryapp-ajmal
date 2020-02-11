@@ -3,7 +3,7 @@ package TableBook;
 import java.sql.Date;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.BookDetailsImp;
+import com.chainsys.libraryapp.Implementation.BookDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
 
 
@@ -11,7 +11,7 @@ public class TestAddBookDetails {
 
 	public static void main(String[] args) throws Exception {
 		
-		BookDetailsImp obj=new BookDetailsImp();
+		BookDetailsDAOImp obj=new BookDetailsDAOImp();
 		
 System.out.print("Entre values \nBook Name :");
 	Scanner sc= new Scanner(System.in);
