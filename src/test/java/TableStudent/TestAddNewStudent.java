@@ -4,8 +4,8 @@ package TableStudent;
 import java.sql.Date;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.StudentDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
+import com.chainsys.libraryapp.dao.implementation.StudentDetailsDAOImp;
 
 public class TestAddNewStudent {
 

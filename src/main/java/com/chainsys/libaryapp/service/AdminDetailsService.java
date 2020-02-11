@@ -1,8 +1,8 @@
 package com.chainsys.libaryapp.service;
 
-import com.chainsys.libraryapp.Implementation.AdminDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.AdminDetails;
 import com.chainsys.libraryapp.dao.AdminDetailsDAO;
+import com.chainsys.libraryapp.dao.implementation.AdminDetailsDAOImp;
 
 public class AdminDetailsService {
 	private AdminDetailsDAO adminDetailsDAO=new AdminDetailsDAOImp();

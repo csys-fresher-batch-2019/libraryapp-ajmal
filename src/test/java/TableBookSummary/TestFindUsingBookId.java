@@ -3,8 +3,8 @@ package TableBookSummary;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsDueDate;
+import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
 
 public class TestFindUsingBookId {
 

@@ -2,7 +2,7 @@ package AdminDetails;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.AdminDetailsDAOImp;
+import com.chainsys.libraryapp.dao.implementation.AdminDetailsDAOImp;
 
 public class TestAdminLogin {
 

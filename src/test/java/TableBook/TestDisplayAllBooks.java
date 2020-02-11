@@ -2,8 +2,8 @@ package TableBook;
 
 import java.util.ArrayList;
 
-import com.chainsys.libraryapp.Implementation.BookDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
+import com.chainsys.libraryapp.dao.implementation.BookDetailsDAOImp;
 
 public class TestDisplayAllBooks {
 

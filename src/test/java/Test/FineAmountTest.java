@@ -1,11 +1,19 @@
 package Test;
 
-import com.chainsys.libaryapp.service.SummaryDetailsService;
-import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
+import org.junit.Assert;
+
+import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
 
 public class FineAmountTest {
+	
+	
+	public static void main(String[] args) throws Exception {
 	int studentId=1004;
-	int bookId=103;
+	int bookId=102;
+	int expected=0;
 	SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
-	ob.b
+	int actual=ob.calculateFineAmount(studentId, bookId);
+	Assert.assertEquals(expected, actual);
+	System.out.println("Done");
+	}
 }

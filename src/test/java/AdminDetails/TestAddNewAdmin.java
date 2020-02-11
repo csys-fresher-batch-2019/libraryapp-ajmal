@@ -3,8 +3,8 @@ package AdminDetails;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.AdminDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.AdminDetails;
+import com.chainsys.libraryapp.dao.implementation.AdminDetailsDAOImp;
 
 public abstract class TestAddNewAdmin {
 

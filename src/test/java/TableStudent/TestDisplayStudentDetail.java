@@ -2,7 +2,7 @@ package TableStudent;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.StudentDetailsDAOImp;
+import com.chainsys.libraryapp.dao.implementation.StudentDetailsDAOImp;
 
 public class TestDisplayStudentDetail {
 

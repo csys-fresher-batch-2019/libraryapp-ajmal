@@ -2,11 +2,11 @@ package com.chainsys.libaryapp.service;
 
 import java.util.ArrayList;
 
-import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.StudentFineSummaryDetails;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsDueDate;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsStudentDetails;
 import com.chainsys.libraryapp.dao.SummaryDetailsDAO;
+import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
 
 public class SummaryDetailsService {
 	private SummaryDetailsDAO summaryDetailsDAO=new SummaryDetailsDAOImp();

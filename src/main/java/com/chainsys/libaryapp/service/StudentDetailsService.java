@@ -2,9 +2,9 @@ package com.chainsys.libaryapp.service;
 
 import java.util.ArrayList;
 
-import com.chainsys.libraryapp.Implementation.StudentDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
 import com.chainsys.libraryapp.dao.StudentDetailsDAO;
+import com.chainsys.libraryapp.dao.implementation.StudentDetailsDAOImp;
 
 public class StudentDetailsService {
 	

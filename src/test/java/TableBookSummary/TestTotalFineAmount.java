@@ -1,6 +1,6 @@
 package TableBookSummary;
 
-import com.chainsys.libraryapp.Implementation.SummaryDetailsDAOImp;
+import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
 
 public class TestTotalFineAmount {
 

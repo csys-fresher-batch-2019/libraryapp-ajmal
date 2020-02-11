@@ -2,9 +2,9 @@ package com.chainsys.libaryapp.service;
 
 import java.util.ArrayList;
 
-import com.chainsys.libraryapp.Implementation.BookDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
 import com.chainsys.libraryapp.dao.BookDetailsDAO;
+import com.chainsys.libraryapp.dao.implementation.BookDetailsDAOImp;
 
 public class BookDetailsService {
 

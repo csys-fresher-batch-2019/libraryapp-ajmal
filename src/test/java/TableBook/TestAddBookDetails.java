@@ -3,8 +3,8 @@ package TableBook;
 import java.sql.Date;
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.Implementation.BookDetailsDAOImp;
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
+import com.chainsys.libraryapp.dao.implementation.BookDetailsDAOImp;
 
 
 public class TestAddBookDetails {
