@@ -29,7 +29,7 @@ public class AdminDetailsDAOImp implements AdminDetailsDAO {
 		}
 	}
 
-	public boolean userLogin(String mailId, String password) throws Exception {
+	public boolean userLogin(String mailId, String password) throws DbException {
 		String sql = "select * from admin where admin_mail_id=?";
 		boolean valuse = false;
 		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {

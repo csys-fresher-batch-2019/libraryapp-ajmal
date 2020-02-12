@@ -42,7 +42,7 @@ public class SummaryDetailsService {
 	public ArrayList<StudentFineSummaryDetails> totalFineAmountOfStudent(int studentId) throws Exception{
 		return summaryDetailsDAO.totalFineAmountOfStudent(studentId);
 	}
-	public int noOfBooksAvailable(int bookId) throws Exception{
+	public Integer noOfBooksAvailable(int bookId) throws Exception{
 		return summaryDetailsDAO.noOfBooksAvailable(bookId);
 	}
 

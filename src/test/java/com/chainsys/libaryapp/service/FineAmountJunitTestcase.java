@@ -21,8 +21,6 @@ public class FineAmountJunitTestcase {
 				
 			} catch (Exception e) {
 				fail();
-				
-				e.printStackTrace();
 			}
 		
 

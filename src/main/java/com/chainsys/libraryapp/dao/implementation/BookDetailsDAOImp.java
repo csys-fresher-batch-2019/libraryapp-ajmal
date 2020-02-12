@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
@@ -90,7 +91,7 @@ public class BookDetailsDAOImp implements BookDetailsDAO{
 		return ob;
 	}
 
-	public ArrayList<BookDetails> displayAllBooks() throws Exception {
+	public ArrayList<BookDetails> displayAllBooks() throws DbException {
 		String sql ="select * from books";
 		ArrayList<BookDetails> list= new ArrayList<BookDetails>();
 		try(Connection con=ConnectionUtil.getConnection();
@@ -116,7 +117,40 @@ public class BookDetailsDAOImp implements BookDetailsDAO{
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			throw new Exception("unable to display");
+			throw new DbException("unable to display");
+		}
+		return list;
+	}
+
+
+	@Override
+	public ArrayList<BookDetails> searchByName(String bookName) throws DbException {
+		String sql="select * from books where lower(book_name)like lower('%"+bookName+"%')";
+		ArrayList<BookDetails> list= new ArrayList<BookDetails>();
+		try(Connection con=ConnectionUtil.getConnection();
+				Statement st = con.createStatement();ResultSet rs = st.executeQuery(sql);)
+		{
+		
+			while(rs.next())
+			{
+				BookDetails ob= new BookDetails();
+				ob.setBookId(rs.getInt("book_id"));
+				ob.setBookName(rs.getString("book_name"));
+				ob.setBookCategory(rs.getString("book_cat"));
+				ob.setBookAutherName(rs.getString("book_author"));
+				ob.setBookEdition(rs.getInt("book_edition"));
+				//ob.setBookPrice(rs.getInt("book_price"));
+				//ob.setBookPurchasedDate(rs.getDate("purchased_date"));
+				////ob.setBookCopies(rs.getInt("no_of_bks"));
+				//ob.setBookPages(rs.getInt("no_of_pgs"));
+				list.add(ob);
+			}
+		}
+		
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			throw new DbException("unable to display");
 		}
 		return list;
 	}

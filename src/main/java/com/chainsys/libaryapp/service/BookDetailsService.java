@@ -26,4 +26,7 @@ public class BookDetailsService {
 	public ArrayList<BookDetails> displayAllBooks() throws Exception {
 		return bookDetailsDAO.displayAllBooks();
 	}
+	public ArrayList<BookDetails> searchByName(String bookName) throws Exception{
+		return bookDetailsDAO.searchByName(bookName);
+	}
 }

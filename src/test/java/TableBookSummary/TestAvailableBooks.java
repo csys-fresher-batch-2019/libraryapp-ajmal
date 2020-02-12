@@ -11,8 +11,16 @@ public class TestAvailableBooks {
 		Scanner sc=new Scanner(System.in);
 		System.out.print("Enter the book to be found available");
 		int bookId=sc.nextInt();
-		int remaining=ob.noOfBooksAvailable(bookId);
+		Integer remaining=null;
+		remaining=ob.noOfBooksAvailable(bookId);
+		if(remaining != null) {
+			
 		System.out.println(remaining);
+		}
+		else
+		{
+			System.out.println("This bookId doesn't exists..");
+		}
 		sc.close();
 	}
 

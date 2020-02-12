@@ -114,7 +114,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 		return list;
 	}
 
-	public int totalFineAmount() throws Exception {
+	public int totalFineAmount() throws DbException {
 		int total=0;
 		String sql = "select sum(fine_amt) from details";
 		try(Connection con=ConnectionUtil.getConnection();
@@ -164,16 +164,19 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 		return list;
 	}
 
-	public void updateReturnRecord(int studentId, int bookId, Integer fineAmount) throws DbException, SQLException {
+	public void updateReturnRecord(int studentId, int bookId, Integer fineAmount) throws DbException {
 		
 		if (fineAmount != 0) {
 			String sql = "update details set fine_amt=? where book_id =? and std_id =? and status=0";
 			try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
-			{
+			{ 
 			stmt.setInt(1, fineAmount);
 			stmt.setInt(2, bookId);
 			stmt.setInt(3, studentId);
 			stmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			System.out.println("Fine Updated");
 			} 
@@ -185,6 +188,9 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 			stmt.setInt(1, bookId);
 			stmt.setInt(2, studentId);
 			stmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			System.out.println("Fine Updated");
 		}
@@ -200,7 +206,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 			e.printStackTrace();
 			throw new DbException("Unable to update");
 		}
-	}
+	} 
 
 	@Override
 	public boolean bookTaken(int studentId, int bookId) throws DbException {
@@ -271,9 +277,9 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 	}
 
 	@Override
-	public int noOfBooksAvailable(int bookId) throws DbException {
+	public Integer noOfBooksAvailable(int bookId) throws DbException {
 		String sql = "select fn_rem_bks(?) as total from dual";
-		int remaining=0;
+		Integer remaining=null;
 		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt=con.prepareStatement(sql);)
 		{
 			stmt.setInt(1, bookId);
