@@ -1,5 +1,6 @@
 package com.chainsys.libraryapp.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
@@ -10,5 +11,6 @@ public interface StudentDetailsDAO {
 	public void addStudentDetails(StudentDetails studentdetails)throws DbException;
 	public StudentDetails displayStudentDetail(int studentId)throws DbException;
 	public ArrayList<StudentDetails> displayAllStudents()throws DbException;
+	public Date studentLogin(int studentId)throws DbException;
 	
 }

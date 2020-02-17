@@ -1,4 +1,4 @@
-package com.chainsys.libaryapp.service;
+package com.chainsys.libraryapp.service;
 
 import com.chainsys.libraryapp.LibaryModel.AdminDetails;
 import com.chainsys.libraryapp.dao.AdminDetailsDAO;

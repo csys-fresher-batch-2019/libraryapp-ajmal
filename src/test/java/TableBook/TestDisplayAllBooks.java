@@ -3,12 +3,12 @@ package TableBook;
 import java.util.ArrayList;
 
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
-import com.chainsys.libraryapp.dao.implementation.BookDetailsDAOImp;
+import com.chainsys.libraryapp.service.BookDetailsService;
 
 public class TestDisplayAllBooks {
 
 	public static void main(String[] args) throws Exception {
-		BookDetailsDAOImp ob=new BookDetailsDAOImp();
+		BookDetailsService ob=new BookDetailsService();
 		ArrayList<BookDetails> out= new ArrayList<BookDetails>();
 		out=ob.displayAllBooks();
 		for(BookDetails details:out)

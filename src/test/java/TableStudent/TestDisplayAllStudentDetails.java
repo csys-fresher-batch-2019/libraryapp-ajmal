@@ -1,12 +1,20 @@
 package TableStudent;
 
-import com.chainsys.libraryapp.dao.implementation.StudentDetailsDAOImp;
+import java.util.ArrayList;
+
+import com.chainsys.libraryapp.LibaryModel.StudentDetails;
+import com.chainsys.libraryapp.service.StudentDetailsService;
 
 public class TestDisplayAllStudentDetails {
 
 	public static void main(String[] args) throws Exception {
-		StudentDetailsDAOImp ob=new StudentDetailsDAOImp();
-		ob.displayAllStudents();
+		StudentDetailsService ob=new StudentDetailsService();
+		ArrayList<StudentDetails> list = new ArrayList<StudentDetails>();
+		list=ob.displayAllStudents();
+		for(StudentDetails details:list)
+		{
+			System.out.println(details);
+		}
 
 	}
 

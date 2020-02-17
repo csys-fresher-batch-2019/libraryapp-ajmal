@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Scanner;
 
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
-import com.chainsys.libraryapp.dao.implementation.StudentDetailsDAOImp;
+import com.chainsys.libraryapp.service.StudentDetailsService;
 
 public class TestAddNewStudent {
 
@@ -25,7 +25,7 @@ public class TestAddNewStudent {
 	    int yearOfJoin = sc.nextInt();
 	    Date date = Date.valueOf(dateOfBirth);
 	    
-	    StudentDetailsDAOImp obj =new StudentDetailsDAOImp();
+	    StudentDetailsService obj =new StudentDetailsService();
 	    StudentDetails ob=new StudentDetails();
 	    ob.setStudentName(studentName);
 	    ob.setStudentDepatment(studentDepartment);

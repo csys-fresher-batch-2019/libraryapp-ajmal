@@ -1,4 +1,4 @@
-package com.chainsys.libaryapp.service;
+package com.chainsys.libraryapp.service;
 
 import java.util.ArrayList;
 

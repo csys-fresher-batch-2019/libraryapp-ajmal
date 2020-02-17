@@ -4,14 +4,14 @@ import java.sql.Date;
 import java.util.Scanner;
 
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
-import com.chainsys.libraryapp.dao.implementation.BookDetailsDAOImp;
+import com.chainsys.libraryapp.service.BookDetailsService;
 
 
 public class TestAddBookDetails {
 
 	public static void main(String[] args) throws Exception {
 		
-		BookDetailsDAOImp obj=new BookDetailsDAOImp();
+		BookDetailsService obj=new BookDetailsService();
 		
 System.out.print("Entre values \nBook Name :");
 	Scanner sc= new Scanner(System.in);

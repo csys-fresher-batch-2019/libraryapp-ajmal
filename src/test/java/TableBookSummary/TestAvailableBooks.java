@@ -2,14 +2,14 @@ package TableBookSummary;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
+import com.chainsys.libraryapp.service.SummaryDetailsService;
 
 public class TestAvailableBooks {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
+		SummaryDetailsService ob=new SummaryDetailsService();
 		Scanner sc=new Scanner(System.in);
-		System.out.print("Enter the book to be found available");
+		System.out.print("Enter the bookId to be found available : ");
 		int bookId=sc.nextInt();
 		Integer remaining=null;
 		remaining=ob.noOfBooksAvailable(bookId);

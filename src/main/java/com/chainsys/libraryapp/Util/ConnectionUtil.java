@@ -1,4 +1,4 @@
-package com.chainsys.libraryapp.Util;
+package com.chainsys.libraryapp.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.chainsys.libraryapp.exception.DbException;
 
-public class ConnectionUtil {
+public class Connectionutil {
 	public static Connection getConnection() throws DbException {
 		Connection connection = null; 
 		try {

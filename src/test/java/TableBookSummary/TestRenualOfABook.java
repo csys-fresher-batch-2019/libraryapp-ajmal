@@ -2,21 +2,19 @@ package TableBookSummary;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
+import com.chainsys.libraryapp.service.SummaryDetailsService;
 
 public class TestRenualOfABook {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
+		SummaryDetailsService ob=new SummaryDetailsService();
 		Scanner sc=new Scanner(System.in);
 		System.out.print("Enter the BookId : ");
 		int bookId=sc.nextInt();
 		System.out.print("Enter the StudentId : ");
 		int studentId=sc.nextInt();
-		
-		
 		Integer fineAmount=ob.calculateFineAmount(studentId, bookId);
-		System.out.println("Fine Amount = "+fineAmount+"\nDo you want to return (Y/N) - ");
+		System.out.println("Fine Amount = "+fineAmount+"\nDo you want to Renual the book (Y/N) - ");
 		String output=sc.next();
 		if(output.equalsIgnoreCase("Y"))
 		{

@@ -1,4 +1,4 @@
-package com.chainsys.libaryapp.service;
+package com.chainsys.libraryapp.service;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,8 @@ public class BookDetailsService {
 		bookDetailsDAO.addNewBook(bookdetails);
 	}
 
-	public void updateBookCopies(BookDetails bookdetails) throws Exception {
-
-		bookDetailsDAO.updateBookCopies(bookdetails);
+	public void updateBookCopies(int bookId,int bookCopies) throws Exception {
+		bookDetailsDAO.updateBookCopies(bookId, bookCopies);
 	}
 
 	public BookDetails displayBook(int bookId) throws Exception {
@@ -28,5 +27,7 @@ public class BookDetailsService {
 	}
 	public ArrayList<BookDetails> searchByName(String bookName) throws Exception{
 		return bookDetailsDAO.searchByName(bookName);
+		
 	}
+	
 }

@@ -1,4 +1,4 @@
-package com.chainsys.libaryapp.service;
+package com.chainsys.libraryapp.service;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,8 @@ import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
 public class SummaryDetailsService {
 	private SummaryDetailsDAO summaryDetailsDAO=new SummaryDetailsDAOImp();
 	
-	public void addNewEntry(int studentId,int bookId)throws Exception{
-		summaryDetailsDAO.addNewEntry(studentId, bookId);
+	public boolean addNewEntry(int studentId,int bookId)throws Exception{
+		return summaryDetailsDAO.addNewEntry(studentId, bookId);
 	}
 	public Integer calculateFineAmount(int studentId,int bookId)throws Exception{
 		boolean bookTaken=summaryDetailsDAO.bookTaken(studentId, bookId);
@@ -27,8 +27,8 @@ public class SummaryDetailsService {
 	public void updateReturnRecord(int studentId, int bookId, Integer fineAmount) throws Exception{
 		summaryDetailsDAO.updateReturnRecord(studentId, bookId, fineAmount);
 	}
-	public ArrayList<SummaryDetailsDueDate> displayStudentDetailsForDueDate(int bookId) throws Exception{
-		return summaryDetailsDAO.displayStudentDetailsForDueDate(bookId);
+	public ArrayList<SummaryDetailsDueDate> displayStudentNotReturnedBook(int bookId) throws Exception{
+		return summaryDetailsDAO.displayStudentNotReturnedBook(bookId);
 	}
 	public int totalFineAmount() throws Exception{
 		return summaryDetailsDAO.totalFineAmount();

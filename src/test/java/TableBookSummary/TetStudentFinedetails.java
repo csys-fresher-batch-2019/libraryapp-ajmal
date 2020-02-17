@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.chainsys.libraryapp.LibaryModel.StudentFineSummaryDetails;
-import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
+import com.chainsys.libraryapp.service.SummaryDetailsService;
 
 public class TetStudentFinedetails {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsDAOImp ob= new SummaryDetailsDAOImp();
+		SummaryDetailsService ob= new SummaryDetailsService();
 		Scanner sc=new Scanner(System.in);
 		//To calculate the Total Fine amount of a student along with their not Returned books
 		System.out.print("Enter the Student Id : ");

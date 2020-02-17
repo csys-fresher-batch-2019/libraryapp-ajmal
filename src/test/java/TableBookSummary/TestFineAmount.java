@@ -2,12 +2,12 @@ package TableBookSummary;
 
 import java.util.Scanner;
 
-import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
+import com.chainsys.libraryapp.service.SummaryDetailsService;
 
 public class TestFineAmount {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
+		SummaryDetailsService ob=new SummaryDetailsService();
 		Scanner sc=new Scanner(System.in);
 		System.out.print("Enter the BookId : ");
 		int bookId=sc.nextInt();
@@ -15,13 +15,7 @@ public class TestFineAmount {
 		int studentId=sc.nextInt();
 		Integer fineAmount=ob.calculateFineAmount(studentId, bookId);
 		System.out.println("Fine Amount = "+fineAmount);
-		
-		
-		
-		
-		sc.close();
-		
-			
+		sc.close();		
 	}
 
 }

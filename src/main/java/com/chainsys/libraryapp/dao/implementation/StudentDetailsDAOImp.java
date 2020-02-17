@@ -1,13 +1,14 @@
 package com.chainsys.libraryapp.dao.implementation;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.chainsys.libraryapp.LibaryModel.StudentDetails;
-import com.chainsys.libraryapp.Util.ConnectionUtil;
+import com.chainsys.libraryapp.util.Connectionutil;
 import com.chainsys.libraryapp.dao.StudentDetailsDAO;
 import com.chainsys.libraryapp.exception.DbException;
 
@@ -15,7 +16,7 @@ public class StudentDetailsDAOImp implements StudentDetailsDAO {
 
 	public void addStudentDetails(StudentDetails studentdetails) throws DbException {
 		String sql = "insert into student(std_name,std_dept,std_dob,std_mail_id,std_mob_no,joining_yr,std_id) values(?,?,?,?,?,?,std_seq.nextval)";
-		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
+		try (Connection con = Connectionutil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
 			stmt.setString(1, studentdetails.getStudentName());
 			stmt.setString(2, studentdetails.getStudentDepatment());
 			stmt.setDate(3, studentdetails.getDateOfBirth());
@@ -32,7 +33,7 @@ public class StudentDetailsDAOImp implements StudentDetailsDAO {
 	public StudentDetails displayStudentDetail(int studentId) throws DbException {
 		StudentDetails ob = null;
 		String sql = "select * from student where std_id=?";
-		try (Connection con = ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
+		try (Connection con = Connectionutil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
 			stmt.setInt(1, studentId);
 			try (ResultSet rs = stmt.executeQuery();) {
 
@@ -57,7 +58,7 @@ public class StudentDetailsDAOImp implements StudentDetailsDAO {
 	public ArrayList<StudentDetails> displayAllStudents() throws DbException {
 		ArrayList<StudentDetails> list = new ArrayList<StudentDetails>();
 		String sql = "select * from student";
-		try (Connection con = ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);
+		try (Connection con = Connectionutil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();)
 		{
 		
@@ -80,6 +81,26 @@ public class StudentDetailsDAOImp implements StudentDetailsDAO {
 			throw new DbException("Unable to Disaplay");
 		}
 		return list;
+	}
+
+	@Override
+	public Date studentLogin(int studentId) throws DbException {
+		String sql="select std_dob form student where std_id=?";
+		Date dob;
+		try(Connection con = Connectionutil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
+		{
+			stmt.setInt(1,studentId);
+			try(ResultSet rs=stmt.executeQuery();)
+			{
+				dob=rs.getDate("std_dob");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new DbException("No date found"); 
+		}
+		return dob;
 	}
 
 }

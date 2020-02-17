@@ -3,13 +3,14 @@ package TableBook;
 import java.util.Scanner;
 
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
-import com.chainsys.libraryapp.dao.implementation.BookDetailsDAOImp;
+import com.chainsys.libraryapp.service.BookDetailsService;
 
 public class TestDisplayBookDetails {
 
 	public static void main(String[] args) throws Exception {
-		BookDetailsDAOImp ob=new BookDetailsDAOImp();
+		BookDetailsService ob=new BookDetailsService();
 		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the bookId : ");
 		int bookId=sc.nextInt();
 		BookDetails out=new BookDetails();
 		out=ob.displayBook(bookId);
@@ -19,7 +20,8 @@ public class TestDisplayBookDetails {
 		}
 		else
 		{
-			System.out.println("no book Found");
+			System.out.println("No Book Found, Please Enter A valid BookId\n");
+			TestDisplayBookDetails.main(args);
 		}
 		sc.close();
 	}

@@ -1,13 +1,13 @@
 package TableBookSummary;
 
-import com.chainsys.libraryapp.dao.implementation.SummaryDetailsDAOImp;
+import com.chainsys.libraryapp.service.SummaryDetailsService;
 
 public class TestTotalFineAmount {
 
 	public static void main(String[] args) throws Exception {
-		SummaryDetailsDAOImp ob=new SummaryDetailsDAOImp();
+		SummaryDetailsService ob=new SummaryDetailsService();
 		int total =ob.totalFineAmount();
-		System.out.println("Sum of fine=" + total);
+		System.out.println("Tootal Fine = " + total);
 	}
 
 }

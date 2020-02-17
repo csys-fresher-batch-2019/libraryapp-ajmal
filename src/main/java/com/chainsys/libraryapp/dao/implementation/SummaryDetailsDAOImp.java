@@ -13,34 +13,36 @@ import java.util.ArrayList;
 import com.chainsys.libraryapp.LibaryModel.StudentFineSummaryDetails;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsDueDate;
 import com.chainsys.libraryapp.LibaryModel.SummaryDetailsStudentDetails;
-import com.chainsys.libraryapp.Util.ConnectionUtil;
+import com.chainsys.libraryapp.util.Connectionutil;
 import com.chainsys.libraryapp.dao.SummaryDetailsDAO;
 import com.chainsys.libraryapp.exception.DbException;
 
 public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 
 
-	public void addNewEntry(int studentId, int bookId) throws DbException {
+	public boolean addNewEntry(int studentId, int bookId) throws DbException {
 		String sqll = "select * from details where book_id=" + bookId + " and std_id=" + studentId + " and status =0";
-		try(Connection con=ConnectionUtil.getConnection(); Statement st = con.createStatement();ResultSet rs = st.executeQuery(sqll);) {
+		boolean out=false;
+		try(Connection con=Connectionutil.getConnection(); Statement st = con.createStatement();ResultSet rs = st.executeQuery(sqll);) {
 			int dBookId = 0;
 			if (rs.next()) {
 				dBookId = rs.getInt("book_id");
 			}
 			if (dBookId == bookId) {
-				System.out.println("You have already taken this book, Try another");
+				out=false;
 			} else {
 				String sql = "insert into details(book_id,std_id,book_count) values(?,?,book_count_sq.nextval)";
-				System.out.println(sql);
 				PreparedStatement stmt = con.prepareStatement(sql);
 				stmt.setInt(1, bookId);
 				stmt.setInt(2, studentId);
 				stmt.executeUpdate();
+				out=true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DbException("Unable to insert");
 		}
+		return out;
 
 	}
 
@@ -49,7 +51,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 		LocalDate returnedDate = LocalDate.now();
 		Integer fineAmount = null;
 		String sql = "select * from details where book_id=? and std_id=? and status=0";
-		try(Connection con=ConnectionUtil.getConnection();
+		try(Connection con=Connectionutil.getConnection();
 		PreparedStatement stmt = con.prepareStatement(sql);)
 		{
 		stmt.setInt(1, bookId);
@@ -82,10 +84,10 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 		return fineAmount;
 	}
 
-	public ArrayList<SummaryDetailsDueDate> displayStudentDetailsForDueDate(int bookId) throws DbException {
+	public ArrayList<SummaryDetailsDueDate> displayStudentNotReturnedBook(int bookId) throws DbException {
 		String sql = "select  d.std_id,s.std_name,s.std_dept,s.std_mob_no,d.book_id,b.book_name,d.issue_date,d.due_date from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.book_id=?";
 		ArrayList<SummaryDetailsDueDate> list = new ArrayList<SummaryDetailsDueDate>();
-		try(Connection con=ConnectionUtil.getConnection();
+		try(Connection con=Connectionutil.getConnection();
 		PreparedStatement stmt = con.prepareStatement(sql);)
 		{
 		stmt.setInt(1, bookId);
@@ -117,7 +119,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 	public int totalFineAmount() throws DbException {
 		int total=0;
 		String sql = "select sum(fine_amt) from details";
-		try(Connection con=ConnectionUtil.getConnection();
+		try(Connection con=Connectionutil.getConnection();
 		PreparedStatement stmt = con.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();)
 		{
@@ -139,7 +141,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 	public ArrayList<SummaryDetailsStudentDetails> studentNotReturnedBook(int studentId) throws DbException {
 		ArrayList<SummaryDetailsStudentDetails> list = new ArrayList<SummaryDetailsStudentDetails>();
 		String sql = "select  s.std_name,b.book_name,b.book_id,d.issue_date,d.due_date from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.std_id=?";
-		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
+		try(Connection con=Connectionutil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
 		{
 		stmt.setInt(1, studentId);
 		try(ResultSet rs = stmt.executeQuery();)
@@ -168,7 +170,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 		
 		if (fineAmount != 0) {
 			String sql = "update details set fine_amt=? where book_id =? and std_id =? and status=0";
-			try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
+			try(Connection con=Connectionutil.getConnection();PreparedStatement stmt = con.prepareStatement(sql);)
 			{ 
 			stmt.setInt(1, fineAmount);
 			stmt.setInt(2, bookId);
@@ -182,7 +184,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 			} 
 			else {
 			String sql = "update details set fine_amt=0 where book_id =? and std_id =? and status=0";
-			try(Connection con=ConnectionUtil.getConnection();
+			try(Connection con=Connectionutil.getConnection();
 			PreparedStatement stmt = con.prepareStatement(sql);)
 			{
 			stmt.setInt(1, bookId);
@@ -195,7 +197,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 			System.out.println("Fine Updated");
 		}
 		String sql2 = "update details set status=1 , returned_date=sysdate where book_id =? and std_id =? and status=0";
-		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt2 = con.prepareStatement(sql2);)
+		try(Connection con=Connectionutil.getConnection();PreparedStatement stmt2 = con.prepareStatement(sql2);)
 		{
 		stmt2.setInt(1, bookId);
 		stmt2.setInt(2, studentId);
@@ -213,8 +215,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 		boolean taken = false;
 
 		String sql = "select * from details where book_id=? and std_id=? and status=0";
-		System.out.println(sql);
-		try(Connection con=ConnectionUtil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
+		try(Connection con=Connectionutil.getConnection(); PreparedStatement stmt = con.prepareStatement(sql);) {
 			stmt.setInt(1, bookId);
 			stmt.setInt(2, studentId);
 
@@ -235,7 +236,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 	public ArrayList<StudentFineSummaryDetails> totalFineAmountOfStudent(int studentId) throws DbException {
 		String sql="select  s.std_name,b.book_name,b.book_id,b.book_cat,d.issue_date,d.due_date,d.fine_amt from details d,books b ,student s where s.std_id=d.std_id and d.status=0 and b.book_id=d.book_id and d.std_id=?";
 		ArrayList<StudentFineSummaryDetails> list=new ArrayList<>();
-		try(Connection con=ConnectionUtil.getConnection(); PreparedStatement stmt=con.prepareStatement(sql);)
+		try(Connection con=Connectionutil.getConnection(); PreparedStatement stmt=con.prepareStatement(sql);)
 		{
 			stmt.setInt(1, studentId);
 			int totalFineAmount=0;
@@ -280,7 +281,7 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 	public Integer noOfBooksAvailable(int bookId) throws DbException {
 		String sql = "select fn_rem_bks(?) as total from dual";
 		Integer remaining=null;
-		try(Connection con=ConnectionUtil.getConnection();PreparedStatement stmt=con.prepareStatement(sql);)
+		try(Connection con=Connectionutil.getConnection();PreparedStatement stmt=con.prepareStatement(sql);)
 		{
 			stmt.setInt(1, bookId);
 			try(ResultSet rs=stmt.executeQuery();)
@@ -299,6 +300,32 @@ public class SummaryDetailsDAOImp implements SummaryDetailsDAO {
 			throw new DbException("Unable to calculate");
 		}
 		return remaining;
+	}
+
+	@Override
+	public boolean limitForStudent(int studentId) throws DbException {
+		String sql ="select count(std_id) from details where std_id=? and status=0";
+		boolean out=false;
+		try(Connection con=Connectionutil.getConnection();PreparedStatement stmt=con.prepareStatement(sql);)
+		{
+			stmt.setInt(1,studentId );
+			try(ResultSet rs=stmt.executeQuery();)
+			{
+				if(rs.next())
+				{
+					int count=rs.getInt("count(std_id)");
+					if(count>5)
+					{
+						out=true;
+					}
+				}
+			}
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			throw new DbException("Unable to calculate");
+		}
+		return out;
 	}
 
 }

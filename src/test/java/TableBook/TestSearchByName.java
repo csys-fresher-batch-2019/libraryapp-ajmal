@@ -3,8 +3,8 @@ package TableBook;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.chainsys.libaryapp.service.BookDetailsService;
 import com.chainsys.libraryapp.LibaryModel.BookDetails;
+import com.chainsys.libraryapp.service.BookDetailsService;
 
 public class TestSearchByName {
 
@@ -15,9 +15,16 @@ public class TestSearchByName {
 		Scanner sc=new Scanner(System.in);
 		String bookName= sc.next();
 		list=ob.searchByName(bookName);
+		boolean result=false;
 		for(BookDetails details:list)
 		{
+			result=true;
 			System.out.println(details);
+		}
+		if(!result) {
+			
+		System.out.println("Enter The Correct Name of the Book to Found");
+		TestSearchByName.main(null);
 		}
 		sc.close();
 

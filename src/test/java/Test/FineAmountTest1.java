@@ -2,7 +2,7 @@ package Test;
 
 import org.junit.Assert;
 
-import com.chainsys.libaryapp.service.SummaryDetailsService;
+import com.chainsys.libraryapp.service.SummaryDetailsService;
 
 
 public class FineAmountTest1 {
